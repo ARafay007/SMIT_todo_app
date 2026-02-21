@@ -6,8 +6,6 @@ import { ShowTasks } from "./ShowTasks"
 
 function App() {
   const [taskList, setTaskList] = useState([]);
-
-  console.log(taskList);
   
   return (
     <div
@@ -26,8 +24,8 @@ function App() {
           borderRadius: '6px'
         }}
       >
-        <AddNewTask tasklistProp={taskList} setTaskListProp={setTaskList} />
-        <ShowTasks />
+        <AddNewTask taskListProp={taskList} setTaskListProp={setTaskList} />
+        <ShowTasks taskListProp={taskList} />
       </div>
     </div>
   )

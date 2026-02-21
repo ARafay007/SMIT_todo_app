@@ -2,13 +2,19 @@
 
 import { useState, useRef } from "react";
 
+const obj = {
+    name: 'abc',
+    age: 12,
+    color: 'red'
+};
+
+const {name, age} = obj
+
 export const AddNewTask = (props) => {
     const inputFieldRef = useRef('');
     
     const onAddTask = () => {
-        console.log(inputFieldRef.current.value);
-
-        props.setTaskListProp(inputFieldRef.current.value);
+        props.setTaskListProp([...props.taskListProp, inputFieldRef.current.value]);
     };
 
     return(
