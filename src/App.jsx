@@ -25,7 +25,7 @@ function App() {
         }}
       >
         <AddNewTask taskListProp={taskList} setTaskListProp={setTaskList} />
-        <ShowTasks taskListProp={taskList} />
+        <ShowTasks taskListProp={taskList} setTaskListProp={setTaskList} />
       </div>
     </div>
   )

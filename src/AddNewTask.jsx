@@ -14,7 +14,14 @@ export const AddNewTask = (props) => {
     const inputFieldRef = useRef('');
     
     const onAddTask = () => {
-        props.setTaskListProp([...props.taskListProp, inputFieldRef.current.value]);
+        const date = new Date();
+
+        const taskObj = {
+            id: date.getTime(),
+            task: inputFieldRef.current.value,
+            isCompleted: false,
+        };
+        props.setTaskListProp([...props.taskListProp, taskObj]);
     };
 
     return(
