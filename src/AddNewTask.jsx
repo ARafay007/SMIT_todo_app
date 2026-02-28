@@ -20,6 +20,7 @@ export const AddNewTask = (props) => {
             id: date.getTime(),
             task: inputFieldRef.current.value,
             isCompleted: false,
+            isEditMode: false,
         };
         props.setTaskListProp([...props.taskListProp, taskObj]);
     };

@@ -7,6 +7,8 @@ import { ShowTasks } from "./ShowTasks"
 function App() {
   const [taskList, setTaskList] = useState([]);
   
+  console.log(taskList);
+
   return (
     <div
       style={{

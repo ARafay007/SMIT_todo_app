@@ -1,4 +1,5 @@
 
+import { EditTask } from './EditTask'; 
 import './ShowTask.css';
 
 export const ShowTasks = (props) => {
@@ -27,6 +28,24 @@ export const ShowTasks = (props) => {
 
         props.setTaskListProp(updatedTaskList);
     };
+    
+    const showEditView = (id) => {
+        const taskListClone = structuredClone(props.taskListProp);
+
+        const updatedTaskList = taskListClone.map((el) => {
+            if(el.id === id){
+                el.isEditMode = true;
+            }
+
+            return el;
+        });
+
+        props.setTaskListProp(updatedTaskList);
+    }
+
+    const onEditTask = (taskObj, taskValue) => {
+        console.log(taskObj, taskValue);
+    };
 
     return (
         <div 
@@ -40,6 +59,9 @@ export const ShowTasks = (props) => {
             {
                 props.taskListProp.map((el, index) => {
                     return (
+                        el.isEditMode === true ? 
+                        <EditTask key={el.id} taskObj={el} editTaskProp={onEditTask} />
+                        :
                         <div
                             style={{
                                 width: '95%',
@@ -57,8 +79,10 @@ export const ShowTasks = (props) => {
                             </p> */}
 
                             <p 
-                                style={{width: '75%', fontSize: '25px' }} 
-                                className={el.isCompleted === true ? "task_completed" : "" } >
+                                style={{width: '75%', fontSize: '25px' }}
+                                className={`${el.isCompleted === true && 'task_completed'}`}
+                                // className={el.isCompleted === true ? "task_completed" : ""}
+                            >
                                 {el.task}
                             </p>
                             <button
@@ -80,6 +104,7 @@ export const ShowTasks = (props) => {
                                     color: 'green',
                                     marginRight: '5px',
                                 }}
+                                onClick={() => {showEditView(el.id)}}
                             >
                                 Edit
                             </button>
@@ -98,30 +123,6 @@ export const ShowTasks = (props) => {
                     )
                 })
             }
-            <div
-                style={{
-                    width: '95%',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    borderBottom: '0.5px solid #c0c0c0'
-                }}
-            >
-                <input 
-                type="text"
-                style={{
-                    fontSize: '30px',
-                    width: '80%'
-                }}
-            />
-            <button
-                style={{
-                    fontSize: '30px',
-                    marginLeft: '10px'
-                }}
-            >
-                Done
-            </button>
-            </div>
         </div>
     );
 };
