@@ -5,12 +5,17 @@ import { useState } from "react";
 export const EditTask = (props) => {
     const [taskValue, setTaskValue] = useState(props.taskObj.task);
 
-    const onUpdateTask = (event) => {
+    const onInputChange = (event) => {
         setTaskValue(event.target.value);
     }
 
-    const editTask = () => {
-        props.editTaskProp(props.taskObj, taskValue);
+    const onUpdateTask = () => {
+        const taskObjClone = structuredClone(props.taskObj);
+        
+        taskObjClone.task = taskValue;
+        taskObjClone.isEditMode = false;
+
+        props.updateTaskValue(taskObjClone);
     };
 
     return(
@@ -28,14 +33,14 @@ export const EditTask = (props) => {
                     width: '80%'
                 }}
                 value={taskValue}
-                onChange={onUpdateTask}
+                onChange={onInputChange}
             />
             <button
                 style={{
                     fontSize: '30px',
                     marginLeft: '10px'
                 }}
-                onClick={editTask}
+                onClick={onUpdateTask}
             >
                 Save
             </button>

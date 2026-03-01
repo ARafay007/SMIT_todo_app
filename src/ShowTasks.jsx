@@ -43,8 +43,18 @@ export const ShowTasks = (props) => {
         props.setTaskListProp(updatedTaskList);
     }
 
-    const onEditTask = (taskObj, taskValue) => {
-        console.log(taskObj, taskValue);
+    const onEditTask = (taskObj) => {
+        const taskListClone = structuredClone(props.taskListProp);
+
+        const updatedTaskList = taskListClone.map((obj) => {
+            if(obj.id === taskObj.id){
+                obj = taskObj;
+            }
+
+            return obj;
+        });
+
+        props.setTaskListProp(updatedTaskList);
     };
 
     return (
@@ -60,7 +70,7 @@ export const ShowTasks = (props) => {
                 props.taskListProp.map((el, index) => {
                     return (
                         el.isEditMode === true ? 
-                        <EditTask key={el.id} taskObj={el} editTaskProp={onEditTask} />
+                        <EditTask key={el.id} taskObj={el} updateTaskValue={onEditTask} />
                         :
                         <div
                             style={{
